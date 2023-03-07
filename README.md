@@ -23,8 +23,12 @@ Stevens, N.T. (2022) "Constraints on transient glacier slip with ice-bed separat
 
 REFERENCES:
 Carmichael, J.D., 2013. Melt-Triggered Seismic Response in Hydraulically-Active Polar Ice: Observations and Methods. University of Washington.
+
 Carmichael, J.D., Joughin, I., Behn, M.D., Das, S., King, M.A., Stevens, L., Lizarralde, D., 2015. Seismicity on the western Greenland Ice Sheet: Surface fracture in the vicinity of active moulins. Journal of Geophysical Research: Earth Surface 120, 1082–1106. https://doi.org/10.1002/2014JF003398
+
 McBrearty, I.W., Zoet, L., Anandakrishnan, S., 2020. Basal seismicity of the Northeast Greenland Ice Stream. Journal of Glaciology 1.
+
 Ross, Z.E., Ben-Zion, Y., 2014. An earthquake detection algorithm with pseudo-probabilities of multiple indicators. Geophysical Journal International 197, 458–463. https://doi.org/10.1093/gji/ggt516
+
 Silver, P.G., Chan, W.W., 1991. Shear Wave Splitting and Subcontinental Mantle Deformation. Journal of Geophysical Research 96, 16429–16454.
 
