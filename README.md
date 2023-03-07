@@ -22,6 +22,7 @@ Stevens, N.T. (2022) "Constraints on transient glacier slip with ice-bed separat
 
 
 REFERENCES:
+
 Carmichael, J.D., 2013. Melt-Triggered Seismic Response in Hydraulically-Active Polar Ice: Observations and Methods. University of Washington.
 
 Carmichael, J.D., Joughin, I., Behn, M.D., Das, S., King, M.A., Stevens, L., Lizarralde, D., 2015. Seismicity on the western Greenland Ice Sheet: Surface fracture in the vicinity of active moulins. Journal of Geophysical Research: Earth Surface 120, 1082–1106. https://doi.org/10.1002/2014JF003398
