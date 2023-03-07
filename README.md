@@ -6,5 +6,8 @@ N.T. Stevens and others from the AUG 2019 nodal seismic deployment on Saskatchew
 
 Waveform and initial catalog data are archived at: https://minds.wisconsin.edu/handle/1793/83756 (and links to the IRIS-DMC therein).
 
-If you find these codes useful, please cite (peer-reviewed article forthcoming):
+If you find these codes useful, please cite:
+
 Stevens, N.T. (2022) "Constraints on transient glacier slip with ice-bed separation" Doctoral Dissertation, University of Wisconsin - Madison. ISBN:9798841732495 
+
+(peer-reviewed article forthcoming)
