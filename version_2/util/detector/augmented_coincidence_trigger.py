@@ -12,15 +12,24 @@
 #               and Carmichael et al. (2015).
 #
 # Copyright (C) 2019, 2020 Nathan T. Stevens
+# :last major update: 15. APR 2020
+# Header notes added 8. MAR 2023 for upload to GitHub
+# Home-brew module imports updated 8. MAR 2023
 
 
 from obspy.signal.trigger import *
 import sys
-sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows')
-import detectors.kurtosis as okt
-import detectors.f_dist_fit as fdf
+import os
+# sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows')
+# import detectors.kurtosis as okt
+# import detectors.f_dist_fit as fdf
+
 from joblib import Parallel, delayed
 import pandas as pd
+sys.path.append(os.path.join('..'))
+import util.detector.kurtosis as okt
+import util.detector.f_dist_fit as fdf
+
 
 def cftrigger(crf_stream, ppfb_on,  ppfb_off, thr_coincidence_sum,\
               mlvl=4, trace_ids = None, max_trigger_length = 2.,\

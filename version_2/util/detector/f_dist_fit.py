@@ -12,6 +12,9 @@ Attribution:  Implementation of the statistical core of the noise-adaptive detec
             Carmichael et al. (2015)
 
 Copyright (C) 2020 Nathan T. Stevens
+
+:last major revision: 10. APR 2020
+    Header updated with last revision date on 8. MAR 2023 for upload to GitHub
 """
 import scipy as sp
 import numpy as np

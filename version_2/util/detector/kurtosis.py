@@ -8,6 +8,8 @@
 # Attribution:  Based upon the obspy.signal.trigger.py and associated scripts by
 #               Moritz Beyreuther & Tobias Megies
 # Copyright (C) 2019, 2020 Nathan T. Stevens
+# Last Major Revision: 14. APR 2020
+    Header note added 8. MAR 2023 for upload to GitHub
 """
 
 from __future__ import (absolute_import, division, print_function, unicode_literals)

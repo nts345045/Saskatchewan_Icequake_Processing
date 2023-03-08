@@ -1,4 +1,16 @@
+"""
+:module: process_detections_v3.py
+:purpose: Driver with parallelization options to conduct event detection and phase picking using a windowed kurtosis CRF,
+        noise-adaptive station detection trigger threshold from Carmichael et al. (2015), and a network coincidence trigger.
+        Phase picking uses an adapted algorithm based on Akazakwa (2004) summarized in Stevens (2022)
+        Further, this driver conducts estimates of windowed inter-quartile-range (IQR) on continuous data as a relative
+        measure of background noise/tremor amplitude 
+:auth: Nathan T. Stevens
+:email: ntstevens@wisc.edu
+:last major revision: 10. DEC 2020
+    Header, Home-Brewed module paths, and imported modules updated 8. MAR 2023 for upload to GitHub
 
+"""
 
 ### Import Environmental Modules ### - seispy Environment
 import sys
@@ -10,15 +22,22 @@ from obspy.core import read, Stream, UTCDateTime
 from joblib import Parallel, delayed
 
 ### Import Home-Brewed Modules ###
-sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows')
-import detectors.kurtosis as okt
-import detectors.augmented_coincidence_trigger as act
-import detectors.f_dist_fit as fdf
-import detectors.ar_aic_picker as arp
-import dbtools.connect as conn
-import translate.phase_translator as pt
-sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows/rect_reprocess')
-from rect_reprocess.util.data import db2st
+# sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows')
+# import detectors.kurtosis as okt
+# import detectors.augmented_coincidence_trigger as act
+# import detectors.f_dist_fit as fdf
+# import detectors.ar_aic_picker as arp
+# import dbtools.connect as conn
+# import translate.phase_translator as pt
+# sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows/rect_reprocess')
+# from rect_reprocess.util.data import db2st
+sys.path.append(os.path.join('..'))
+import util.detector.kurtosis as okt
+import util.detector.augmented_coincidence_trigger as act
+import util.detector.ar_aic_picker as arp
+import util.pisces_DB.data as dbd
+import ulti.translate.pahse_translator as pt
+
 # from dbtools.wf_query import db2st
 
 
@@ -193,9 +212,9 @@ except FileExistsError:
 
 ######### CONNECT TO DATABASE ##########
 print('Connecting to Database(s)')
-session,meta,tabdict,tablist,collist = conn.connect4query(dbstr = wfdb)
+session,meta,tabdict,tablist,collist = dbd.connect4query(dbstr = wfdb)
 # if wfdb != savedb:
-save_session,save_meta,save_td,save_tl,save_cl = conn.connect4query(dbstr = savedb)
+save_session,save_meta,save_td,save_tl,save_cl = dbd.connect4query(dbstr = savedb)
 # else:
 #     save_session = session
 #     save_td = tabdict
@@ -249,8 +268,8 @@ while it_start < run_start + run_length:
     if verb > 1:
         print('Loading  Data for %s to %s (%s)'%(str(it_start),str(it_end),str(UTCDateTime())))
     # Get data using wfdisc housed in pisces sqlite database
-    istz = db2st(session,tabdict,starttime=it_start,endtime=it_end,channels=Zchans)
-    isth = db2st(session,tabdict,starttime=it_start,endtime=it_end,channels=Hchans)
+    istz = dbd.db2st(session,tabdict,starttime=it_start,endtime=it_end,channels=Zchans)
+    isth = dbd.db2st(session,tabdict,starttime=it_start,endtime=it_end,channels=Hchans)
     if len(istz) >=min_sta_count:
 
     ######### PREPROCESS STREAM DATA ########

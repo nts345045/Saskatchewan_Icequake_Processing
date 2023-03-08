@@ -1,13 +1,30 @@
+"""
+:module: ar_aic_picker.py
+:purpose: Methods for using an adapted version of Akazawa (2004)'s strong-motion detection algorithm used in Stevens (2022, Chapter 4)
+:auth: Nathan T. Stevens
+:email: ntstevens@wisc.edu
+:last major update: 15. APR 2020
+    Import paths updated and header added 8.MAR 2023 for GitHub upload
+"""
+
+
 import sys
 import numpy as np
 import pandas as pd
 from warnings import warn
-sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows')
-from detectors import kurtosis as okt
-from detectors import f_dist_fit as fdf
-from dbtools.wf_query import db2st
+# sys.path.append('/usr1/ntstevens/SCRIPTS/PYTHON/SGGS_Workflows')
+# from detectors import kurtosis as okt
+# from detectors import f_dist_fit as fdf
+# from dbtools.wf_query import db2st
 from joblib import Parallel, delayed
 from joblib import wrap_non_picklable_objects
+
+sys.path.append(os.path.join('..'))
+import util.detector.kurtosis as okt
+import util.detector.f_dist_fit as fdf
+from util.pisces_DB.data import db2st
+
+
 
 def classic_sta_lta_diff_py(trace,tsta=0.01,tlta=0.1):
     """
