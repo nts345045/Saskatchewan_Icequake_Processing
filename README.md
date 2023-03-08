@@ -4,9 +4,7 @@ Alpine glacier seismicity analysis codes custom-developed for the dense nodal ar
 version_1/ contains archived processing scripts from analyses in 2019/2020 used to develop the basal ice-quake catalog presented in a number of talks by 
 N.T. Stevens and others from the AUG 2019 nodal seismic deployment on Saskatchewan Glacier and the dissertation by N.T. Stevens.
 
-version_2/ contains processing scripts that expand upon version_1/ including a parallelized implementation of the F-statistic dynamic threshold from 
-Carmichael et al. (2013, 2015) and re-picking algorithms that consider physics of shear-wave splitting (e.g., Silver and Chan, 1991) and polarization
-(e.g., Ross & Ben-Zion, 2014).
+version_2/ contains processing scripts that expand upon version_1/ including a parallelized implementation of the F-statistic dynamic threshold from Carmichael et al. (2013, 2015) and updated use of parallelization libraries.
 
 These codes heavily leverage SQLite database interfaces and schema provided by the PISCES project (https://github.com/LANL-Seismoacoustics/pisces) from its earliet release on GitHub. In future versions (version_3 | new MAIN branch) these dependencies may be relaxed in favor of use of Pandas for relational
 table management to mitigate obsolescence and use of more-popular tabular data interfaces.
