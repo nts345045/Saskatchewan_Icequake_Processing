@@ -4,7 +4,7 @@
 :auth: Nathan T. Stevens
 :email: ntstevens@wisc.edu
 :last revision: 13. DEC 2019
-    Headers updated 7. NOV 2023 for upload to GitHub
+    Headers and agument names updated 18. MAR 2023
 
 """
 
@@ -21,6 +21,19 @@ fm = '?'
 defnum = '-1.00e+00'
 
 def parsemarkertimes(marker,precision=1e-5):
+    """
+    Extract mean travel-time and travel-time uncertainties
+    from pyrocko.gui.marker.PhaseMarker objects
+
+    :: INPUTS ::
+    :param marker: phase pick marker object
+    :param precision: minimum assumed pick error
+
+    :: OUTPUTS ::
+    :return tmu: mean pick time (average of tmin and tmax or tmin if pick is an instant)
+    :return tsig: pick standard deviation (half-range of tmin - tmax) or precision
+
+    """
     t1 = UTCDateTime(marker.tmin)
     if marker.tmin == marker.tmax:
         tsig = precision
@@ -33,6 +46,18 @@ def parsemarkertimes(marker,precision=1e-5):
        
 
 def marker2dataframes(markerfile):
+    """
+    Convert a pyrocko.Snuffler output marker file into a parsed phase dataframe 
+    formatted with column headers matching NonLinLoc *.obs file formatting and a 
+    reference of hashkeys used for event association
+
+    :: INPUTS ::
+    :param markerfile: path/name of saved marker file
+
+    :: OUTPUTS :: 
+    :return phzdf: pandas.DataFrame containing phase pick information
+    :return hashlist: list of hashkeys for each phase entry in serial order (used for assoc)
+    """
     NLLocPhz=['EventHash','Station','Instrument','Component','PhaseOnset','iPhase',\
               'FMotion','Year','Month','Day','Hour','Minute','Seconds','ErrorType',\
               'ErrorMag','CodaDuration','Amplitude','Period','PriorWt']
@@ -57,13 +82,23 @@ def marker2dataframes(markerfile):
     phzdf = pd.DataFrame(phaselist,columns=NLLocPhz)
     return phzdf, hashlist
 
-def dfhashmatch(dataframe,hashkey):
-    return dataframe[dataframe['EventHash'].isin([hashkey])]
-
-def writeNLLocPhase(filename,dataframe,hashlist,filepath='./'):
+def dfhashmatch(phzdf,hashkey):
     """
-    Write phase entries of a maker dataframe that have matching hashkeys to eventmarker-sourced hashkeys (i.e. associated phases)
+    Convenience method for selecting phases in a phzdf a single hashkey.
+    """
+    return phzdf[phzdf['EventHash'].isin([hashkey])]
+
+def writeNLLocPhase(filename,phzdf,hashlist,filepath='./'):
+    """
+    Write phase entries of a maker phzdf that have matching hashkeys to eventmarker-sourced hashkeys (i.e. associated phases)
     to the NonLinLoc phase file format.
+
+    :: INPUTS ::
+    :param filename: output *.obs file name, including *.obs extension
+    :param phzdf: phase-pick dataframe
+    :param hashlist: list of hashes for associated phases
+    :param filepath: Where to save the *.obs file.
+
     NLLoc Format                    phaselist#  Null Value
     0)  %-6s Station Name           [0].[1]     REQUIRED
     1)  %-4s Instrument                         ?
@@ -93,7 +128,7 @@ def writeNLLocPhase(filename,dataframe,hashlist,filepath='./'):
 
     fobj = open(os.path.join(filepath,filename),'w')
     for ihash in hashlist:
-        dfi = dfhashmatch(dataframe,ihash)
+        dfi = dfhashmatch(phzdf,ihash)
         nlines = len(dfi)
         mat = dfi.values[:,1:]
         for i_ in range(nlines):
