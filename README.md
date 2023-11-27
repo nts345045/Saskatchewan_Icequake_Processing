@@ -1,8 +1,7 @@
 # Saskatchewan_Icequake_Processing
 Alpine glacier seismicity analysis codes custom-developed for the dense nodal array deployment at Saskatchewan Glacier, Canadian Rocky Mountains
 
-version_1/ contains archived processing scripts from analyses in 2019/2020 used to develop the basal ice-quake catalog presented in a number of talks by 
-N.T. Stevens and others from the AUG 2019 nodal seismic deployment on Saskatchewan Glacier and the dissertation by N.T. Stevens.
+EPSL_Accepted_Codebase/ contains archived processing scripts from analyses in 2019/2020 used to develop the basal ice-quake catalog presented in a number of talks by N.T. Stevens and others from the AUG 2019 nodal seismic deployment on Saskatchewan Glacier and the dissertation by N.T. Stevens.
 
 version_2/ contains processing scripts that expand upon version_1/ including a parallelized implementation of the F-statistic dynamic threshold from Carmichael et al. (2013, 2015) and updated use of parallelization libraries.
 
